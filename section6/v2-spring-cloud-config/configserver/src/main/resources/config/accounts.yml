@@ -1,0 +1,10 @@
+build:
+  version: "3.0"
+accounts:
+  message: "Accounts Service"
+  contactDetails:
+    name: "Kenny"
+    email: "kenny@gmail.com"
+  onCallSupport:
+    - "123-456-7890"
+    - "234-567-8901"
