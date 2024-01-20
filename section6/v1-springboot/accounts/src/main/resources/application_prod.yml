@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+build:
+  version: "1.0"
+accounts:
+  message: "Accounts Prod Service"
+  contactDetails:
+    name: "Kenny Prod "
+    email: "kennyProd@gmail.com"
+  onCallSupport:
+    - "123-456-7890"
+    - "234-567-8901"
