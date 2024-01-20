@@ -14,3 +14,13 @@ spring:
     hibernate:
         ddl-auto: update
     show-sql: true
+build:
+  version: "3.0"
+cards:
+  message: "Cards Service"
+  contactDetails:
+    name: "Kenny"
+    email: "kenny@gmail.com"
+  onCallSupport:
+    - "123-456-7890"
+    - "234-567-8901"
