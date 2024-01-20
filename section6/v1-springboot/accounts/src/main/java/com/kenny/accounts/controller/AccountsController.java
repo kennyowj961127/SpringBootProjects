@@ -1,6 +1,7 @@
 package com.kenny.accounts.controller;
 
 import com.kenny.accounts.constants.AccountConstants;
+import com.kenny.accounts.dto.AccountsContactInfoDto;
 import com.kenny.accounts.dto.CustomerDto;
 import com.kenny.accounts.dto.ErrorResponseDto;
 import com.kenny.accounts.dto.ResponseDto;
@@ -41,6 +42,9 @@ public class AccountsController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
     @Operation(
             summary = "Create a new account",
             description = "REST API to create new Customer and Account"
@@ -210,5 +214,30 @@ public class AccountsController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Fetch Contact Info REST API",
+            description = "REST API to fetch Contact Info"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
     }
 }
