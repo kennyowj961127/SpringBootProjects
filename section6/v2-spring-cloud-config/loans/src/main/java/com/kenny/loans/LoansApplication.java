@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef="auditorAwareImpl") // Enable JPA Auditing with AuditorAware bean name
-@EnableConfigurationProperties(value = LoansContactInfoDto.class)
+@EnableConfigurationProperties(value = {LoansContactInfoDto.class})
 @OpenAPIDefinition(
         info = @Info(
                 title = "Loans Microservice REST API Documentation",
