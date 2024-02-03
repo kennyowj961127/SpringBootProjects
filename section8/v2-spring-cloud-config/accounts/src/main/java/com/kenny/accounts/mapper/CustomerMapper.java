@@ -1,5 +1,6 @@
 package com.kenny.accounts.mapper;
 
+import com.kenny.accounts.dto.CustomerDetailsDto;
 import com.kenny.accounts.dto.CustomerDto;
 import com.kenny.accounts.entity.Customer;
 
@@ -11,6 +12,12 @@ public class CustomerMapper {
         return customerDto;
     }
 
+    public static CustomerDetailsDto mapToCustomerDetailsDto(Customer customer, CustomerDetailsDto customerDetailsDto){
+        customerDetailsDto.setName(customer.getName());
+        customerDetailsDto.setEmail(customer.getEmail());
+        customerDetailsDto.setMobileNumber(customer.getMobileNumber());
+        return customerDetailsDto;
+    }
     public static Customer mapToCustomer(CustomerDto customerDto, Customer customer){
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
