@@ -34,3 +34,9 @@ info:
     name: "Gateway Server"
   description: "Gateway Server Service"
   version: "1.0.0"
+logging:
+  level:
+    com:
+      kenny:
+        gatewayserver: debug
+
