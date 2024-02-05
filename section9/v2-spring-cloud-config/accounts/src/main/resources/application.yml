@@ -32,6 +32,7 @@ management:
         enabled: true
     shutdown:
       enabled: true
+
   info:
     env:
       enabled: true

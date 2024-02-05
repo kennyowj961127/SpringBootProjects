@@ -23,6 +23,13 @@ management:
         include: "*" # 暴露所有的端点
     shutdown:
       enabled: true
+  health:
+    probes:
+      enabled: true
+    endpoint:
+      health:
+        probes:
+          enabled: true
   info:
     env:
       enabled: true
