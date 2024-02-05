@@ -45,3 +45,8 @@ info:
     name: "cards"
   description: "Cards Service"
   version: "1.0.0"
+logging:
+  level:
+    com:
+      kenny:
+        cards: debug
