@@ -15,6 +15,7 @@ import com.kenny.accounts.service.ICustomersService;
 import com.kenny.accounts.service.client.CardsFeignClient;
 import com.kenny.accounts.service.client.LoansFeignClient;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,9 @@ import org.springframework.stereotype.Service;
 public class CustomersServiceImpl implements ICustomersService {
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
+    @Qualifier("cardsFallback")
     private CardsFeignClient cardsFeignClient;
+    @Qualifier("loansFallback")
     private LoansFeignClient loansFeignClient;
 
     @Override
@@ -40,13 +43,16 @@ public class CustomersServiceImpl implements ICustomersService {
         customerDetailsDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
 
         ResponseEntity<LoansDto> loansDtoResponseEntity = loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
-        LoansDto loansDto = loansDtoResponseEntity.getBody();
-        customerDetailsDto.setLoansDto(loansDto);
+        if(null != loansDtoResponseEntity){
+            LoansDto loansDto = loansDtoResponseEntity.getBody();
+            customerDetailsDto.setLoansDto(loansDto);
+        }
 
         ResponseEntity<CardsDto> cardsDtoResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
-        CardsDto cardsDto = cardsDtoResponseEntity.getBody();
-        customerDetailsDto.setCardsDto(cardsDto);
-
+        if(null != cardsDtoResponseEntity){
+            CardsDto cardsDto = cardsDtoResponseEntity.getBody();
+            customerDetailsDto.setCardsDto(cardsDto);
+        }
         return customerDetailsDto;
     }
 }
