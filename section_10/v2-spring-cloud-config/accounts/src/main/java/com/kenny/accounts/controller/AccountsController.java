@@ -196,10 +196,9 @@ public class AccountsController {
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo(){
         logger.debug("getBuildInfo() method invoked");
-        throw new RuntimeException("Exception occurred");
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(buildVersion);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(buildVersion);
     }
 
     public ResponseEntity<String> getBuildInfoFallback(Throwable throwable){

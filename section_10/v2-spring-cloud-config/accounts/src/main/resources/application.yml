@@ -80,3 +80,5 @@ resilience4j:
         max-attempts: 3
         enable-exponential-backoff: true
         exponential-backoff-multiplier: 2.0
+        ignore-exceptions:
+          - java.lang.NullPointerException
