@@ -99,7 +99,9 @@ public class CardsController {
                                                             @RequestParam
                                                             @Pattern(regexp="(^$|[0-9]{8})",message = "Mobile number must be 8 digits")
                                                             String mobileNumber){
+        logger.debug("fetchCardDetails method start");
         CardsDto cardsDto = iCardsService.fetchCard(mobileNumber);
+        logger.debug("fetchCardDetails method end");
         return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
     }
 

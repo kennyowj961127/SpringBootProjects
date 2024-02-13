@@ -57,8 +57,9 @@ public class CustomerController {
                                                                     @RequestParam
                                                                    @Pattern(regexp = "^[0-9]{8}$", message = "Mobile number must be 8 digits")
                                                                    String mobileNumber) {
-        logger.debug("Accounts - KennyBank-Correlation-Id found: {}", correlationId);
+        logger.debug("fetchCustomerDetails method start");
         CustomerDetailsDto customerDetailsDto = iCustomersService.fetchCustomerDetails(mobileNumber, correlationId);
+        logger.debug("fetchCustomerDetails method end");
         return ResponseEntity.status(HttpStatus.OK).body(customerDetailsDto);
     }
 }
