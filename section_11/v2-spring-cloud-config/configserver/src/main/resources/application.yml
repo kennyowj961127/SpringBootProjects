@@ -2,20 +2,20 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: "git"
-#    active: native
+#    active: "git"
+    active: native
   cloud:
     config:
       server:
-#        native:
-#          search-locations: "classpath:/config"
-#            search-locations: "file:/Users/kenny-sunhope/Documents/config"
-        git:
-          uri: "https://github.com/kennyowj961127/SpringBootConfigServer.git"
-          default-label: "master"
-          timeout: 5
-          clone-on-start: true
-          force-pull: true
+        native:
+           search-locations: "classpath:/config"
+#          search-locations: "file:/Users/kenny-sunhope/Documents/config"
+#        git:
+#          uri: "https://github.com/kennyowj961127/SpringBootConfigServer.git"
+#          default-label: "master"
+#          timeout: 30
+#          clone-on-start: true
+#          force-pull: true
 management:
   endpoints:
     web:

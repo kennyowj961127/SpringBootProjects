@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y curl
 
 # Add the application's jar to the container
 COPY target/accounts-0.0.1-SNAPSHOT.jar accounts-0.0.1-SNAPSHOT.jar
+COPY target/classes/opentelemetry-javaagent-1.32.0.jar opentelemetry-javaagent-1.32.0.jar
 
 # Execute the jar file
 ENTRYPOINT ["java","-jar","accounts-0.0.1-SNAPSHOT.jar"]
