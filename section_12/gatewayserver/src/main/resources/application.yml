@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:8071"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false # close the discovery locator
+          lower-case-service-id: true
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 10s
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 2s
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # ???????
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+info:
+  app:
+    name: "Gateway Server"
+  description: "Gateway Server Service"
+  version: "1.0.0"
+logging:
+  level:
+    com:
+      kenny:
+        gatewayserver: debug
+  pattern:
+    level: "%5p [${spring.application.name}, %X{trace_id}, %X{span_id}]"
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 10
+        permitted-number-of-calls-in-half-open-state: 2
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10000
+
+
