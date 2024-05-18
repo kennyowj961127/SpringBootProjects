@@ -1,7 +1,7 @@
 # SpringBootProjects
 
 Build Docker Image procedure
-1. mvn clean install
+1. mvn clean install -DskipTests
 2. docker build . -t kennyowj961127/cards:s4 
 3. docker image push docker.io/kennyowj961127/accounts:s4
 

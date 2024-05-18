@@ -3,6 +3,18 @@ networks:
     driver: "bridge"
 
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:22.0.1
+    container_name: keycloak
+    ports:
+      - "7080:8080"
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+    command: "start-dev"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
   read:
     image: grafana/loki:2.9.2
     command: "-config.file=/etc/loki/config.yaml -target=read"
@@ -240,7 +252,7 @@ services:
       file: common-config.yml
       service: network-deploy-service
   configserver:
-    image: kennyowj961127/configserver:s11
+    image: kennyowj961127/configserver:s12
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -259,7 +271,7 @@ services:
       grafana:
         condition: service_healthy
   eurekaserver:
-    image: kennyowj961127/eurekaserver:s11
+    image: kennyowj961127/eurekaserver:s12
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -280,10 +292,8 @@ services:
       OTEL_SERVICE_NAME: "eurekaserver"
 
   accounts:
-    image: kennyowj961127/accounts:s11
+    image: kennyowj961127/accounts:s12
     container_name: accounts-ms
-    ports:
-      - "8081:8081"
     healthcheck:
       test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
       interval: 30s
@@ -304,10 +314,8 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: kennyowj961127/loans:s11
+    image: kennyowj961127/loans:s12
     container_name: loans-ms
-    ports:
-      - "8090:8090"
     healthcheck:
       test: "curl --fail --silent localhost:8090/actuator/health | grep UP || exit 1"
       interval: 30s
@@ -327,10 +335,8 @@ services:
       file: common-config.yml
       service: microservice-eureka-config
   cards:
-    image: kennyowj961127/cards:s11
+    image: kennyowj961127/cards:s12
     container_name: cards-ms
-    ports:
-      - "9000:9000"
     healthcheck:
       test: "curl --fail --silent localhost:9000/actuator/health | grep UP || exit 1"
       interval: 30s
@@ -350,7 +356,7 @@ services:
       file: common-config.yml
       service: microservice-eureka-config
   gatewayserver:
-    image: kennyowj961127/gatewayserver:s11
+    image: kennyowj961127/gatewayserver:s12
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
@@ -361,6 +367,7 @@ services:
       SPRING_DATA_REDIS_TIMEOUT: 1s
       SPRING_DATA_REDIS_CONNECTION_TIMEOUT: 2s
       OTEL_SERVICE_NAME: "gatewayserver"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8080/realms/master/protocol/openid-connect/certs"
     depends_on:
       accounts:
         condition: service_healthy
