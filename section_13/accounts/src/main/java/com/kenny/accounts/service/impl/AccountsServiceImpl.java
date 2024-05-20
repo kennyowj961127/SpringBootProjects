@@ -2,6 +2,7 @@ package com.kenny.accounts.service.impl;
 
 import com.kenny.accounts.constants.AccountConstants;
 import com.kenny.accounts.dto.AccountsDto;
+import com.kenny.accounts.dto.AccountsMsgDto;
 import com.kenny.accounts.dto.CustomerDto;
 import com.kenny.accounts.entity.Accounts;
 import com.kenny.accounts.entity.Customer;
@@ -13,16 +14,20 @@ import com.kenny.accounts.repository.AccountsRepository;
 import com.kenny.accounts.repository.CustomerRepository;
 import com.kenny.accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
+import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
 public class AccountsServiceImpl implements IAccountsService {
 
+    private static final Logger log = Logger.getLogger(AccountsServiceImpl.class.getName());
+    private final StreamBridge streamBridge;
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
 
@@ -35,7 +40,15 @@ public class AccountsServiceImpl implements IAccountsService {
         }
 
         Customer savedCustomer = customerRepository.save(customer);
-        accountsRepository.save(createNewAccount(savedCustomer));
+        Accounts savedAccount = accountsRepository.save(createNewAccount(savedCustomer));
+        sendCommunication(savedAccount, savedCustomer);
+    }
+
+    private void sendCommunication(Accounts account, Customer customer){
+        var accountsMsgDto = new AccountsMsgDto(account.getAccountNumber(), customer.getName(), customer.getEmail(), customer.getMobileNumber());
+        log.info("Sending message to the communication service: " + accountsMsgDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgDto);
+        log.info("Is communication message sent: " + result);
     }
 
     @Override

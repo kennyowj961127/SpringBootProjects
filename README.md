@@ -18,6 +18,10 @@ docker run -p 3308:3306 --name loansdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATA
 docker run -p 3309:3306 --name cardsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cardsdb -d mysql &&
 docker run -p 6379:6379 --name kennyredis -d redis
 
+# keycloak 
+docker run -p 7080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:24.0.4 start-dev
+# latest RabbitMQ 3.13
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
 
 Apache benchmark
 ab -n 10 -c2 -v 3 http://localhost:8072/kennybank/cards/api/contact-info
