@@ -21,3 +21,14 @@ kubectl get pods
 
 kubectl apply -f configserver.yml
 
+kubectl delete pod name
+
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+kubectl scale deployment accounts-deployment --replicas=1
+
+kubectl describe pods name
+
+kubectl set image deployment gatewayserver-deployment gatewayserver=eazybytes/gatewayserver:s11 --record
+
+kubectl rollout history deployment gatewayserver-deployment
