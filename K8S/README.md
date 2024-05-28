@@ -39,3 +39,6 @@ kubectl rollout history deployment gatewayserver-deployment
 
 ## Rollback to previous version
 kubectl rollout undo deployment gatewayserver-deployment --to-revision=1
+
+## Delete the deployment
+kubectl delete -f filename
