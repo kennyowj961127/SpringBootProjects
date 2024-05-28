@@ -23,12 +23,19 @@ kubectl apply -f configserver.yml
 
 kubectl delete pod name
 
+## Logs of a pod
 kubectl get events --sort-by=.metadata.creationTimestamp
 
+## Scale the deployment
 kubectl scale deployment accounts-deployment --replicas=1
 
 kubectl describe pods name
 
+## Update the image
 kubectl set image deployment gatewayserver-deployment gatewayserver=eazybytes/gatewayserver:s11 --record
 
+## Rollout history
 kubectl rollout history deployment gatewayserver-deployment
+
+## Rollback to previous version
+kubectl rollout undo deployment gatewayserver-deployment --to-revision=1
