@@ -7,3 +7,6 @@ helm install happy-panda bitnami/wordpress
 
 ## Create Helm Chart
 helm create mychart
+
+## Build Helm Chart
+helm dependencies build
