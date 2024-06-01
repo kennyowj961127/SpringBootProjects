@@ -48,3 +48,6 @@ To access Keycloak from outside the cluster execute the following commands:
 kubectl get pvc
 
 kubectl delete pvc <pvc-name>
+
+## Temporary exposed service ( E.g. Prometheus )
+kubectl port-forward --namespace default svc/prometheus-kube-prometheus-prometheus 9090:9090
