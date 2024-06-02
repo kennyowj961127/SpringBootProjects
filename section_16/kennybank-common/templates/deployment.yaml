@@ -80,5 +80,4 @@ spec:
                 name: {{ .Values.global.configMapName }}
                 key: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
           {{- end }}
-
 {{- end -}}

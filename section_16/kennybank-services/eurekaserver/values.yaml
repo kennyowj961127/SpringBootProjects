@@ -9,7 +9,7 @@ appName: eurekaserver
 replicaCount: 1
 
 image:
-  repository: kennyowj961127/eurekaserver
+  repository: eazybytes/eurekaserver
   tag: s14
 
 containerPort: 8070

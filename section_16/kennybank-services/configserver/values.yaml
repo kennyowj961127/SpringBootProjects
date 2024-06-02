@@ -9,7 +9,7 @@ appName: configserver
 replicaCount: 1
 
 image:
-  repository: kennyowj961127/configserver
+  repository: eazybytes/configserver
   tag: s14
 
 containerPort: 8071

@@ -8,3 +8,7 @@ global:
   otelExporterEndPoint: http://tempo-grafana-tempo-distributor:4317
   otelMetricsExporter: none
   kafkaBrokerURL: kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092
+  accountsDbURL: jdbc:mysql://accountsdb-mysql.default.svc.cluster.local:3307/accountsdb
+  loansDbURL: jdbc:mysql://loansdb-mysql.default.svc.cluster.local:3308/loansdb
+  cardsDbURL: jdbc:mysql://cardsdb-mysql.default.svc.cluster.local:3309/cardsdb
+  redisURL: redis://redis-master.default.svc.cluster.local
