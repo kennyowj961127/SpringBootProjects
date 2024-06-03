@@ -51,3 +51,8 @@ kubectl delete pvc <pvc-name>
 
 ## Temporary exposed service ( E.g. Prometheus )
 kubectl port-forward --namespace default svc/prometheus-kube-prometheus-prometheus 9090:9090
+
+kubectl port-forward --namespace default svc/configserver 8071:8071
+
+## Upgrade helm chart and deployment
+helm upgrade kennybank dev-env
