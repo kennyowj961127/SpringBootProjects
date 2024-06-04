@@ -20,6 +20,10 @@ spring:
         mode: always
     config:
       import: "optional:configserver:http://localhost:8071" # 指定配置文件的位置
+    cloud:
+      kubernetes:
+        discovery:
+          all-namespaces: true
 management:
   endpoints:
     web:
