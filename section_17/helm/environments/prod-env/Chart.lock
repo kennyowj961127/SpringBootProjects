@@ -5,9 +5,6 @@ dependencies:
 - name: configserver
   repository: file://../../kennybank-services/configserver
   version: 0.1.0
-- name: eurekaserver
-  repository: file://../../kennybank-services/eurekaserver
-  version: 0.1.0
 - name: accounts
   repository: file://../../kennybank-services/accounts
   version: 0.1.0
@@ -23,5 +20,5 @@ dependencies:
 - name: message
   repository: file://../../kennybank-services/message
   version: 0.1.0
-digest: sha256:6083c9f9e79e7c308c044c2b823db7156ea649b4ff3166d919766b154551a80f
-generated: "2024-05-31T20:55:59.251749+08:00"
+digest: sha256:d5510ba2953de9b7ebb418366a29bdd84a8b8267767529beaa08941d96c8a5c9
+generated: "2024-06-04T23:03:07.9446872+08:00"

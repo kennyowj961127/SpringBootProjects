@@ -38,7 +38,7 @@ public class GatewayserverApplication {
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
 								.circuitBreaker(config -> config.setName("accountsCircuitBreaker")
 										.setFallbackUri("forward:/contactSupport")))
-						.uri("http://acccounts:8080"))
+						.uri("http://accounts:8081"))
 				.route(p -> p
 						.path("/kennybank/loans/**")
 						.filters(f -> f.rewritePath("/kennybank/loans/(?<segment>.*)", "/${segment}")

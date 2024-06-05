@@ -1,6 +1,0 @@
-dependencies:
-- name: kennybank-common
-  repository: file://../../kennybank-common
-  version: 0.1.0
-digest: sha256:06f6ff4f191effff0be4275b842b4147b33f32cfb3b04c892b33f17a5bed1061
-generated: "2024-05-29T20:43:48.0447813+08:00"
